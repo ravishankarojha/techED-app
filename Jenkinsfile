@@ -3,9 +3,12 @@
 node() {
 
   stage('prepare') {
-      checkout scm
+      def check
+      check=checkout scm
+      echo "${check}"
       setupCommonPipelineEnvironment script:this
       checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
+      sh 'env > env.txt' readFile('env.txt').split("\r?\n").each { println it }
       echo "${GIT_COMMIT}"
        }
 
