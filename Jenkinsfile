@@ -1,7 +1,7 @@
 @Library('piper-library-os') _
 
 node() {
-  
+  def majorversion="1.1.${BUILD_NUMBER}"
   def check
   stage('prepare') {
       check=checkout scm
@@ -23,7 +23,7 @@ node() {
                                                                                 fileIncludePatterns: '**/*',
                                                                                 pushDescription: '',
                                                                                 pushIncremental: false,
-                                                                                pushVersion: "${BUILD_NUMBER}"]
+                                                                                pushVersion: "${majorversion}"]
                                                 ]])
                                                 
                                 newComponentVersionId = "${Sapphire2019SAP_VersionId}"
@@ -44,14 +44,14 @@ stage('Publish to UrbanCode Deploy') {
                                                 deploy: [
                                                                 createSnapshot: [
                                                                                 deployWithSnapshot: true,
-                                                                                snapshotName: "${BUILD_NUMBER}"],
+                                                                                snapshotName: "${majorversion}"],
                                                                                 deployApp: 'Sapphire 2019-SAP-UrbanCode-ABAP-BE-Demo',
                                                                                 deployDesc: 'Requested from Jenkins',
                                                                                 deployEnv: 'DEV',
                                                                                 deployOnlyChanged: false,
                                                                                 deployProc: 'deploy',
                                                                                 deployReqProps: '',
-                                                                                deployVersions: "Sapphire2019SAP:${BUILD_NUMBER}"]])
+                                                                                deployVersions: "Sapphire2019SAP:${majorversion}"]])
                 }
 
 }
