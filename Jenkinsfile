@@ -18,7 +18,7 @@ node() {
       mtaBuild script: this
       step([$class: 'UploadBuild',
       
-             tenantId: '5ade13625558f2c6688d15ce',
+             tenant_id: "5ade13625558f2c6688d15ce",
       
              revision: "${GIT_COMMIT}",
       
