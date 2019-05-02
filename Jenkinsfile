@@ -5,8 +5,6 @@ node() {
   stage('prepare') {
 
       checkout scm
-
-      echo ${GIT_COMMIT}
       
       setupCommonPipelineEnvironment script:this
 
