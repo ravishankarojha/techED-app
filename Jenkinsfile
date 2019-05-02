@@ -17,6 +17,6 @@ node() {
   }
   
   stage('Dev Deployment') {
-  	build job: 'Sapphire-2019-SAP/deploy-DEV', wait: false, parameters: string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)
+  	build job: 'Sapphire-2019-SAP/deploy-DEV', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
   } 
 }
