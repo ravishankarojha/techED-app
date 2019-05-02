@@ -1,0 +1,28 @@
+@Library('piper-library-os') _
+
+properties([parameters([string(name: 'previousBuildNumber', description: 'The version of the application to deploy.'),string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.')])])
+
+node() {
+
+echo "${previousBuildNumber}"
+echo "${previousBuildUrl}"
+
+  stage('neoDeploy') {
+      checkout scm
+
+      setupCommonPipelineEnvironment script:this
+
+           checkChangeInDevelopment script: this,changeDocumentId:'8000004822'
+    
+      mtaBuild script: this
+      neoDeploy script: this
+  }
+
+  stage('solmanTrCreate') {
+      transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
+  stage('solmanUpload') {
+      transportRequestUploadFile  script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
+  step([$class: 'UploadDeployment',tenantId: "5ade13625558f2c6688d15ce",versionName: "${previousBuildNumber}",versionExtId: "${previousBuildNumber}",type: 'Jenkins',environmentId: '2019f265-1296-4250-a075-b50727e695b0',environmentName: 'DEV',appId: '5ef20585-1f38-4973-add0-63eea7cd48b7',description: 'dev deployment from jenkins',appName: "Sapphire 2019-SAP-Jenkins-Fiori-UI-Demo",initiator: "admin",result: 'true'])
+}
