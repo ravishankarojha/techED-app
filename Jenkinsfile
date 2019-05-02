@@ -1,9 +1,9 @@
 @Library('piper-library-os') _
 
 node() {
-
+  
+  def check
   stage('prepare') {
-      def check
       check=checkout scm
       echo "${check}"
       setupCommonPipelineEnvironment script:this
