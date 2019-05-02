@@ -4,7 +4,8 @@ node() {
 
   stage('prepare') {
       checkout scm
-      echo "${GIT_COMMIT}"
+      echo "${scm}"
+      echo "${scm.GIT_COMMIT}"
       setupCommonPipelineEnvironment script:this
       checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
        }
