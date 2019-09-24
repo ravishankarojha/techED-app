@@ -4,7 +4,9 @@ general:
            endpoint: 'https://hclsdsm72a.hcldigilabs.com:8002/sap/opu/odata/sap/AI_CRM_GW_CM_CI_SRV'
            clientOpts: ''
            type: 'SOLMAN'
-           
+           solman:
+            docker:
+                image: ppiper/cm-client:1.0.0.0
 
 steps:
   mtaBuild:
