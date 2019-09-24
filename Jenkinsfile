@@ -1,22 +1,29 @@
 @Library('piper-library-os') _
 
 node() {
-  
-  def check
+
   stage('prepare') {
-      check=checkout scm
-      echo "${check}"
+
+      checkout scm
+
       setupCommonPipelineEnvironment script:this
-      checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
-      echo ">>>>>>>${check.GIT_COMMIT}"
+
+           checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
+    
        }
 
   stage('build') {
       mtaBuild script: this
-      step([$class: 'UploadBuild',tenantId: "5ade13625558f2c6688d15ce",revision: "${check.GIT_COMMIT}",appName: "Sapphire 2019-SAP-Jenkins-Demo",requestor: "admin",id: "${BUILD_NUMBER}"])
   }
-  
-  stage('Dev Deployment') {
-  	build job: 'Sapphire-2019-SAP-Demo/dev_deploy', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
-  } 
+
+  stage('neoDeploy') {
+      neoDeploy script: this
+  }
+
+  stage('solmanTrCreate') {
+      transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
+  stage('solmanUpload') {
+      transportRequestUploadFile  script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
 }
