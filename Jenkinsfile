@@ -14,9 +14,6 @@ node() {
 
   stage('build') {
       mtaBuild script: this
-    dir(srcDir){
-  sh 'cdr=$(pwd); $cdr/jenkins.sh "build.sh"'
-}
   }
 
   stage('neoDeploy') {
