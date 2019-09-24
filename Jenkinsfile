@@ -11,6 +11,16 @@ node() {
            checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
     
        }
+         }
+
+  stage('build') {
+      mtaBuild script: this
+  }
+
+  stage('neoDeploy') {
+      neoDeploy script: this
+  }
+
 
   stage('solmanTrCreate') {
       transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
