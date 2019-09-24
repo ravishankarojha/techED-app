@@ -11,7 +11,6 @@ node() {
            checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
     
        }
-         }
 
   stage('build') {
       mtaBuild script: this
