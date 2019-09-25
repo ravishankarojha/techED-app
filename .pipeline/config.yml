@@ -12,6 +12,9 @@ general:
 steps:
   mtaBuild:
     buildTarget: 'NEO'
+    mtaJarLocation: 'mta.jar'
+    mtaJarLocation: '/opt/sap/mta/lib/mta.jar'
+    dockerImage: 'ppiper/mta-archive-builder'
   neoDeploy:
    neo: 
     neoCredentialsId: 'NEO_DEPLOY'
