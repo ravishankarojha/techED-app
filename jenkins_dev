@@ -1,7 +1,5 @@
 @Library('piper-library-os') _
 
-//properties([parameters([string(name: 'previousBuildNumber', description: 'The version of the application to deploy.'),string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.')])])
-
 node() {
 
 echo "${previousBuildNumber}"
@@ -26,6 +24,5 @@ echo "${previousBuildUrl}"
   }
   
   stage('uploadvelocity') {
-    //step([$class: 'UploadDeployment',tenantId: "5ade13625558f2c6688d15ce",versionName: "${previousBuildNumber}",versionExtId: "${previousBuildNumber}",type: 'Jenkins',environmentId: '1303f5a8-c2cf-4ef3-9d82-c2c4f4d03bff',environmentName: 'DEV',appId: 'd6f9065a-fad6-4077-85b6-066411c2beac',description: 'dev deployment from jenkins',appName: "Sapphire 2019-SAP-Jenkins-Fiori-UI-Demo",initiator: "admin",result: 'true'])  }
-  
+    
 }
