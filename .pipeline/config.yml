@@ -1,7 +1,7 @@
 #Steps Specific Configuration
 general:
    changeManagement:
-           endpoint: 'https://hclsdsm72a.hcldigilabs.com:8002/sap/opu/odata/sap/AI_CRM_GW_CM_CI_SRV'
+           endpoint: 'http://hclsdsm72a.hcldigilabs.com:8001/sap/opu/odata/sap/AI_CRM_GW_CM_CI_SRV'
            clientOpts: ''
            type: 'SOLMAN'
 
