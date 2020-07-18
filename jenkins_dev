@@ -5,6 +5,15 @@ node() {
 //echo "${previousBuildNumber}"
 //echo "${previousBuildUrl}"
 
+ 
+  stage('solmanTrCreate') {
+      transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
+  
+  stage('solmanUpload') {
+      transportRequestUploadFile  script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
+  
   stage('neoDeploy') {
       checkout scm
 
@@ -14,13 +23,6 @@ node() {
     
       mtaBuild script: this
       neoDeploy script: this
-  }
-
-  stage('solmanTrCreate') {
-      transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
-  }
-  stage('solmanUpload') {
-      transportRequestUploadFile  script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
   }
   
   stage('uploadvelocity') {    
