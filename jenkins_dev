@@ -2,8 +2,8 @@
 
 node() {
 
-echo "${previousBuildNumber}"
-echo "${previousBuildUrl}"
+//echo "${previousBuildNumber}"
+//echo "${previousBuildUrl}"
 
   stage('neoDeploy') {
       checkout scm
