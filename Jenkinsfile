@@ -21,6 +21,9 @@ node() {
   stage('solmanTrCreate') {
       transportRequestCreate script:this, changeDocumentId:'8000004988',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
   }
+  stage('solmanTrUpload') {
+       script:this, changeDocumentId:'8000004988',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
+  }
   stage('solmanTRrelease') {
       transportRequestRelease  script:this, changeDocumentId:'8000004988',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
   }
