@@ -25,9 +25,9 @@ node() {
     
       mtaBuild script: this
       neoDeploy script: this
+      
+      step([$class: 'UploadDeployment',tenantId: "5ade13625558f2c6688d15ce",versionName: "${previousBuildNumber}",versionExtId: "${previousBuildNumber}",type: 'Jenkins',environmentId: '1303f5a8-c2cf-4ef3-9d82-c2c4f4d03bff',environmentName: 'DEV',appId: 'cdad77db-b2d4-4a7f-9fc4-e821463a6f14',description: 'dev deployment from jenkins',appName: "SAP-Jenkins",initiator: "admin",result: 'true'])
   }
   
-  stage('uploadvelocity') {    
- }
- 
+  
 } 
