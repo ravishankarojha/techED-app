@@ -22,7 +22,7 @@ stage('build') {
      // step([$class: 'UploadBuild',tenantId: "5ade13625558f2c6688d15ce",revision: "${check.GIT_COMMIT}",appName: "SAP_Build",requestor: "admin",id: "${BUILD_NUMBER}"])
 }
 
- stage ('Upload Build to Accelerate) {
+ stage ('Upload Build to Accelerate') {
       step([$class: 'UploadBuild',
       tenantId: "5ade13625558f2c6688d15ce",
       revision: "${GIT_COMMIT}",
