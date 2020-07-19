@@ -2,9 +2,7 @@
 
 node() {
 
-//echo "${previousBuildNumber}"
-//echo "${previousBuildUrl}"
-
+echo "${previousBuildNumber}"
  
   stage('solmanTrCreate') {
       transportRequestCreate script:this, changeDocumentId:'8000004822',developmentSystemId: 'SM1~ABAP/001',applicationId: 'HCP'
@@ -25,7 +23,22 @@ node() {
       neoDeploy script: this
   }
   
-  stage('uploadvelocity') {    
+  stage('uploadvelocity') { 
+  step([$class: 'UploadDeployment',
+          tenantId: "5ade13625558f2c6688d15ce",
+          versionName: "${previousBuildNumber}",
+          versionExtId: "${previousBuildNumber}",
+          type: 'Jenkins',
+          environmentId: 'dbe4746f-06bb-4964-aa31-66d1c0f1aa9c',
+          environmentName: 'PROD',
+          appId: 'cdad77db-b2d4-4a7f-9fc4-e821463a6f14',
+          description: 'SAP Deployment',
+          appName: "SAP-Jenkins",
+          initiator: "admin",
+          result: 'true'
+       
+      ])
+      
  }
  
 } 
