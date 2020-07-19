@@ -1,12 +1,12 @@
 @Library('piper-library-os') _
 
 //properties([parameters([string(name: 'previousBuildNumber', description: 'The version of the application to deploy.'),string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.')])])
-properties([
-    parameters([
-        string(name: 'majorVersion', description: 'The version of the application to deploy.'),
-        string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.')
-    ])
-])
+
+properties([parameters([
+    string(name: 'previousBuildNumber', description: 'The version of the application to deploy.'),
+    string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.'),
+    string(name: 'gitCommit', description: 'The git commit to deploy.')
+    ])])
 
 node() {
 
@@ -35,8 +35,8 @@ node() {
       //step([$class: 'UploadDeployment',tenantId: "5ade13625558f2c6688d15ce",versionName: "${previousBuildNumber}",versionExtId: "${previousBuildNumber}",type: 'Jenkins',environmentId: '1303f5a8-c2cf-4ef3-9d82-c2c4f4d03bff',environmentName: 'DEV',appId: 'cdad77db-b2d4-4a7f-9fc4-e821463a6f14',description: 'dev deployment from jenkins',appName: "SAP-Jenkins",initiator: "admin",result: 'true'])
       step([$class: 'UploadDeployment',
           tenantId: "5ade13625558f2c6688d15ce",
-          versionName: "${majorVersion}",
-          versionExtId: "${majorVersion}",
+          versionName: "${previousBuildNumber}",
+          //versionExtId: "${majorVersion}",
           type: 'Jenkins',
           environmentId: '8f8dafde-fd8b-4506-8cdc-e83e6e5a5424',
           environmentName: 'DEV',
