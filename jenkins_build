@@ -3,7 +3,7 @@
 node() {
   
   def check
-  def majorVersion="1.0.${BUILD_NUMBER}"
+  def majorVersion="CR-${BUILD_NUMBER}"
   stage('prepare') {
       check=checkout scm
       echo "${check}"
