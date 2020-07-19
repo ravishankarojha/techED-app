@@ -10,7 +10,7 @@ properties([
 
 node() {
 
-  echo "${previousBuildNumber}"
+  echo "${majorVersion}"
   echo "${previousBuildUrl}"
 
  
