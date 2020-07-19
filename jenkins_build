@@ -40,6 +40,10 @@ stage('build') {
      //string(name: 'previousBuildUrl', value: BUILD_URL)
     //]
     
+     echo ">>>>>>>${majorVersion}"
+     echo ">>>>>>>${BUILD_URL}"
+     echo ">>>>>>>${GIT_COMMIT}"
+    
     build job: 'Fonterra-demo/SAP_dev_deploy', wait: false, parameters: [
     string(name: 'previousBuildNumber', value: majorVersion), 
     string(name: 'previousBuildUrl', value: BUILD_URL),
