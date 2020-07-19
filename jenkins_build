@@ -3,6 +3,7 @@
 node() {
   
   def check
+  def majorVersion="1.0.${BUILD_NUMBER}"
   stage('prepare') {
       check=checkout scm
       echo "${check}"
@@ -11,13 +12,27 @@ node() {
       echo ">>>>>>>${check.GIT_COMMIT}"
        }
 
-  stage('build') {
+stage('build') {
       mtaBuild script: this
-      step([$class: 'UploadBuild',tenantId: "5ade13625558f2c6688d15ce",revision: "${check.GIT_COMMIT}",appName: "SAP_Build",requestor: "admin",id: "${BUILD_NUMBER}"])
-
+     // step([$class: 'UploadBuild',tenantId: "5ade13625558f2c6688d15ce",revision: "${check.GIT_COMMIT}",appName: "SAP_Build",requestor: "admin",id: "${BUILD_NUMBER}"])
 }
-  
-  stage('Dev Deployment') {
-  	 build job: 'Fonterra-demo/SAP_dev_deploy', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
+
+ stage ('UCV Upload Build') {
+      step([$class: 'UploadBuild',
+      tenantId: "5ade13625558f2c6688d15ce",
+      revision: "${GIT_COMMIT}",
+      appName: "SAP_Build",
+      requestor: "admin",
+      id: "${majorVersion}"
+    ])
+  }
+  stage('Kick off Dev Deployment') {
+   	  //build job: 'Fonterra-demo/SAP_dev_deploy', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
+     echo "${majorVersion}"
+     build job: 'Fonterra-demo/SAP_dev_deploy', wait: false, parameters: [
+     string(name: 'majorVersion', value: majorVersion),
+     string(name: 'previousBuildUrl', value: BUILD_URL)
+    ]
+    sleep 10
   } 
 }
