@@ -6,13 +6,15 @@ node() {
   // def majorVersion="1.0.${BUILD_NUMBER}"
   def majorVersion="${BUILD_NUMBER}"
   currentBuild.displayName = majorVersion
-   
+  def GIT_COMMIT
+  
   stage('prepare') {
       check=checkout scm
       echo "${check}"
       setupCommonPipelineEnvironment script:this
       checkChangeInDevelopment script: this,changeDocumentId:'8000004822'     
-      echo ">>>>>>>${check.GIT_COMMIT}"
+      GIT_COMMIT = check.GIT_COMMIT
+      echo ">>>>>>>${GIT_COMMIT}"
        }
 
 stage('build') {
@@ -23,7 +25,7 @@ stage('build') {
  stage ('UCV Upload Build') {
       step([$class: 'UploadBuild',
       tenantId: "5ade13625558f2c6688d15ce",
-      revision: "${check.GIT_COMMIT}",
+      revision: "${GIT_COMMIT}",
       appName: "SAP_Build",
       requestor: "admin",
       id: "${majorVersion}"
@@ -41,7 +43,8 @@ stage('build') {
     build job: 'Fonterra-demo/SAP_dev_deploy', wait: true, parameters: [
     string(name: 'previousBuildNumber', value: majorVersion), 
     string(name: 'previousBuildUrl', value: BUILD_URL),
-    string(name: 'gitCommit', value: ${check.GIT_COMMIT})]
+    string(name: 'gitCommit', value: GIT_COMMIT)
+    ]
     
     sleep 10
   } 
