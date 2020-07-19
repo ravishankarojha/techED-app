@@ -70,7 +70,8 @@ stage('build') {
           description: 'SAP Deployment',
           appName: "SAP-Jenkins",
           initiator: "admin",
-          result: 'true'
+          result: 'true',
+          buildUrl: "${BUILD_URL}"
       ])
   
     
