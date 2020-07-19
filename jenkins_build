@@ -17,6 +17,6 @@ node() {
   }
   
   stage('Dev Deployment') {
-  	 build job: 'Fonterra-demo/SAP_Build', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
+  	 build job: 'Fonterra-demo/SAP_dev_deploy', wait: false, parameters: [string(name: 'previousBuildNumber', value: BUILD_NUMBER), string(name: 'previousBuildUrl', value: BUILD_URL)]
   } 
 }
