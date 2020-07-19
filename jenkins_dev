@@ -1,9 +1,11 @@
 @Library('piper-library-os') _
 
+properties([parameters([string(name: 'previousBuildNumber', description: 'The version of the application to deploy.'),string(name: 'previousBuildUrl', description: 'The URL of the build that triggered that deployment.')])])
+
 node() {
 
-//echo "${previousBuildNumber}"
-//echo "${previousBuildUrl}"
+  echo "${previousBuildNumber}"
+  echo "${previousBuildUrl}"
 
  
   stage('solmanTrCreate') {
@@ -19,7 +21,7 @@ node() {
 
       setupCommonPipelineEnvironment script:this
 
-           checkChangeInDevelopment script: this,changeDocumentId:'8000004822'
+      checkChangeInDevelopment script: this,changeDocumentId:'8000004822'
     
       mtaBuild script: this
       neoDeploy script: this
