@@ -20,7 +20,7 @@ stage('build') {
  stage ('UCV Upload Build') {
       step([$class: 'UploadBuild',
       tenantId: "5ade13625558f2c6688d15ce",
-      revision: "${GIT_COMMIT}",
+      revision: "${check.GIT_COMMIT}",
       appName: "SAP_Build",
       requestor: "admin",
       id: "${majorVersion}"
