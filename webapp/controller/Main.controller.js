@@ -1,7 +1,6 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], function(Controller,OMSG) {
+    "sap/ui/core/mvc/Controller"
+], function(Controller) {
     "use strict";
 
     return Controller.extend("com.sap.teched.teched.controller.Main", {
@@ -26,6 +25,7 @@ sap.ui.define([
                     var oModel800 = this.getOwnerComponent().getModel("800");
                     var oTable = oView.byId("table0");
                     oTable.setModel(oModel800);
+                    break;
                     break;
             }
 
