@@ -1,6 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function(Controller) {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast"
+], function(Controller,OMSG) {
     "use strict";
 
     return Controller.extend("com.sap.teched.teched.controller.Main", {
