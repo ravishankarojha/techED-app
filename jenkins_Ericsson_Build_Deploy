@@ -50,7 +50,7 @@ stage('build') {
                                    doGenerateSubmoduleConfigurations: false, 
                                    extensions: [], submoduleCfg: [], 
                                    userRemoteConfigs: [[credentialsId: 'ravishankarojha-github-creds',
-                            url: 'https://github.com/ravishankarojha/techED-app.git']]])
+                            url: 'https://github.com/ravishankarojha/techED-Eric.git']]])
 
       setupCommonPipelineEnvironment script:this
 
