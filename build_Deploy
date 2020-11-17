@@ -69,7 +69,7 @@ stage('build') {
           description: 'SAP fiori Deployment',
           appName: "Jenkins-fiori",
           initiator: "admin",
-          result: 'true',
+          result: 'SUCCEEDED',
           buildUrl: "${BUILD_URL}"
       ])
   
